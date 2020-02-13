@@ -22,6 +22,7 @@
       return _(_.range(this.get('n'))).map(function(rowIndex) {
         return this.get(rowIndex);
       }, this);
+
     },
 
     togglePiece: function(rowIndex, colIndex) {
@@ -79,11 +80,36 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // var specificRow = this.get(rowIndex);
+      var specificRow = this.rows()[rowIndex];
+      console.log(this.rows());
+      //set up a counter
+      // console.log(specificRow);
+      var counter = 0;
+      //iterate throught the row
+      for (var val of specificRow) {
+        //get the sum of the row
+        counter += val;
+      }
+      //return if the sum is greater than 1
+
+      return counter > 1;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      // retreive all the rows
+      var board = this.rows();
+      // console.log(rows);
+      //iterate through all the rows
+      for (var i = 0; i < board.length; i++) {
+        //if any row hasRowConflict
+        if (this.hasRowConflictAt(i)) {
+          //return true
+          return true;
+        }
+      }
+      // otherwise
       return false; // fixme
     },
 
@@ -94,12 +120,33 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      //retreive a board
+      var board = this.rows();
+      //retreive a specific colomn from board
+      var colomn = [];
+      for (var i = 0; i < board.length; i++) {
+        colomn.push(board[i][colIndex]);
+      }
+      //set up a counter
+      var counter = 0;
+      //iterate the colomn
+      for (var val of colomn) {
+        //get the sum of this column
+        counter += val;
+      }
+      //return if the sum is greater than 1
+      return counter > 1; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var board = this.rows();
+      for (var i = 0; i < board.length; i++) { //iterate through board
+        if (this.hasColConflictAt(i)) { //if any column has hasColConflictAt column index
+          return true;//return true
+        }
+      }
+      return false; // fixme//return false
     },
 
 
@@ -109,11 +156,15 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      //retrieve board
+      //set up counter
+      //majorDiagonalColumnIndexAtFirstRow is first column index queen is at? 
       return false; // fixme
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
+
       return false; // fixme
     },
 
